@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './src/Home';
+import Cardapio from './src/Cardapio';
 
 
 const Tab = createBottomTabNavigator();
