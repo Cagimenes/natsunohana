@@ -1,65 +1,120 @@
 import React, { useState } from 'react'
-import { StyleSheet, TextInput, Text, TouchableOpacity, View, Keyboard } from 'react-native'
+import { Keyboard, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StatusBar } from "expo-status-bar";
+import { LinearGradient } from 'expo-linear-gradient';
+import Cadastro from './Cadastro';
+import Header from './Header';
 
-export default function Login({ setLogado }) {
+export default function Login({ setLogado, setCadastro }) {
 
-    const[ email, setEmail ] = useState("");
-    const[ senha, setSenha ] = useState("");
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
-    function Login()
-    {
+    function Login() {
         Keyboard.dismiss();
-        if( email == "julia.menegass159@gmail.com" && senha == "123") {
+        if (email == 'carolmicagimenes@gmail.com' && senha == '1234') {
             setLogado(true);
         }
     }
 
+    function Cadastro() {
+        setLogado(true);
+        setCadastro(true);
+    }
+
     return (
         <View style={css.view}>
-            <TextInput 
-                onChangeText={ (digitado) => setEmail(digitado)}
+            <Header />
+            <StatusBar backgroundColor="#FF994F" />
+            <Text style={css.bemVindo}>SEJA BEM VINDO(A) AO</Text>
+            <Text style={css.nome}>NATSU NO HANA!</Text>
+            <MaterialCommunityIcons style={css.account} name="account-circle" color="#E46204" size={50} />
+            <Text style={css.label}>EMAIL</Text>
+            <TextInput
+                onChangeText={(digitado) => setEmail(digitado)}
                 value={email}
-                style ={css.input}
+                style={css.input}
             />
-            <TextInput 
-                onChangeText={ (digitado) => setSenha(digitado)}
+            <Text style={css.label}>SENHA</Text>
+            <TextInput
+                onChangeText={(digitado) => setSenha(digitado)}
                 value={senha}
-                style ={css.input}
+                style={css.input}
             />
-            <TouchableOpacity 
-                style= {css.btn} 
-                onPress={Login}>
-                <Text style={css.text}>ENTRAR</Text>
-            </TouchableOpacity> 
+            <TouchableOpacity onPress={Login}>
+                <LinearGradient
+                    colors={['#E46204', '#FF7300', '#FAA04C']}
+                    style={css.botao}
+                    start={{x:0,y:1}}
+	                end={{x:1,y:0}}>
+                    <Text style={css.entrar}>ENTRAR</Text>
+                </LinearGradient>
+            </TouchableOpacity>          
+            <TouchableOpacity style={css.btn} onPress={Cadastro}>
+                <Text style={css.cadastro}>É NOVO POR AQUI?</Text>
+            </TouchableOpacity>
         </View>
     )
 }
 const css = StyleSheet.create({
     view: {
-        width: "100%",
-        height: "100%",
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        alignItems: 'center',
+        backgroundColor: "#F0E8DE"
     },
     input: {
-        width: 295,
+        width: '70%',
         height: 55,
-        borderWidth: 2,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#FF7300',
+        borderRadius: 5,
+        padding: 15
+    },
+    bemVindo: {
+        marginTop: 90,
+        fontWeight: 'bold',
+        fontSize: 25,
+        color: '#FF7300'
+    },
+    nome: {
+        width: '60%',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 25,
+        color: 'white',
+        backgroundColor: '#E46204',
+        borderRadius: 5,
+        marginTop: 10
+    },
+    label: {
+        width: '30%',
+        marginTop: 15,
+        marginRight: 165,
+        marginBottom: 5,
+        fontWeight: 'bold',
+        color: '#FF7300'
+    },
+    account: {
+        marginTop: 20
+    },
+    botao: {
+        width: 290,
+        height: 55,
+        marginBottom: 10,
         marginTop: 25,
-        borderRadius: 4,
-        borderColor: "#DC650E"
+        borderRadius: 5,
     },
-    btn: {
-        width: 295,
-        height: 55,
-        backgroundColor: "#DC650E",
-        marginTop: 20,
-        borderRadius: 4,
-    },
-    text: {
-        textAlign: "center",
+    entrar: {
+        color: 'white',
+        fontWeight: 'bold',
         fontSize: 20,
-        marginTop: 12
-    }
+        textAlign: 'center',
+        paddingTop: 15
+    },
+    cadastro: {
+        color: '#E46204',
+        fontWeight: 'bold'
+    }, 
 })
