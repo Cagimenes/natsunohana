@@ -116,5 +116,5 @@ const css = StyleSheet.create({
     cadastro: {
         color: '#E46204',
         fontWeight: 'bold'
-    }, 
+    }
 })
