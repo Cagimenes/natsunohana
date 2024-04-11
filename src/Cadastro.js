@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from './Header';

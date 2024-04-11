@@ -3,6 +3,7 @@ import CarrinhoLista from "./CarrinhoLista";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useState } from "react";
 import Rastreamento from "./Rastreamento"
+import Header from "./Header";
 
 
 const produtos = [
@@ -32,6 +33,7 @@ export default function Carrinho({navigation}) {
     
     return (
         <View style={styles.fundo}>
+            <Header/>
             <View style={styles.header}>
                 <MaterialCommunityIcons style={styles.voltar} name="arrow-left" color="#DC650E" size={33} onPress={() => navigation.navigate( "Cardapio" )}/>
                 <Text style={styles.carrinho}>CARRINHO</Text>
