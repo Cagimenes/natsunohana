@@ -57,7 +57,7 @@ export default function Carrinho({navigation}) {
                         <Text style={styles.subtotal}>SUBTOTAL</Text>
                     </View>
                     <View style={styles.box2}>
-                        <Text style={styles.valorSub}>66,70</Text>
+                        <Text style={styles.valorSub}>R$66,70</Text>
                     </View>
                 </View>
                 <View style={styles.container}>
@@ -117,7 +117,7 @@ export default function Carrinho({navigation}) {
                             <Text style={styles.subtotal}>TOTAL</Text>
                         </View>
                         <View style={styles.box2}>
-                            <Text style={styles.valorSub}>72,70</Text>
+                            <Text style={styles.valorSub}>R$72,70</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={styles.btnConfirmar}>
@@ -139,7 +139,7 @@ export default function Carrinho({navigation}) {
                             <Text style={styles.subtotal}>TOTAL</Text>
                         </View>
                         <View style={styles.box2}>
-                            <Text style={styles.valorSub}>66,70</Text>
+                            <Text style={styles.valorSub}>R$66,70</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={styles.btnConfirmar}>
