@@ -1,9 +1,13 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import Header from "./Header";
+import { StatusBar } from "expo-status-bar";
 
 export default function Home()
 {
     return(
         <View style={styles.container}>
+            <StatusBar backgroundColor="#FF994F" />
+            <Header />
         <Image 
           style={styles.imagemhome}  
           source={require('../assets/imagemhome.png')}
@@ -17,15 +21,14 @@ export default function Home()
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: 100,
         alignItems: "center",
         display: "flex",
-        marginTop: 20,
         backgroundColor: "#F0E8DE"
     },
     imagemhome: {
         width: "95%",
-        height: 660,
+        height: 640,
+        marginTop:10
     },
     btn: {
         width: '60%',
