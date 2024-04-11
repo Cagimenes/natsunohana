@@ -49,7 +49,7 @@ export default function Carrinho({navigation}) {
                     />}
                     keyExtractor={(item) => item.id}
                 />
-                <TouchableOpacity style={styles.botaoAdd}>
+                <TouchableOpacity style={styles.botaoAdd} onPress={() => navigation.navigate( "Cardapio" )}>
                     <Text style={styles.textAdd}>ADICIONAR MAIS ITENS</Text>
                 </TouchableOpacity>
                 <View style={styles.container}>
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
 
     },
     ultimo: {
-        height: 100
+        height: 210
     },
     localRetirada: {
         textAlign: "center",

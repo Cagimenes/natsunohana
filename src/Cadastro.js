@@ -11,8 +11,8 @@ export default function Cadastro({ setLogado, setCadastro }) {
   function Cadastrar() {
 
     setErro( "Senhas não conferem" );
-    //setCadastro(false);
-    //setLogado(false);
+    setCadastro(false);
+    setLogado(false);
   }
 
   function Voltar() {
