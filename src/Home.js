@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         display: "flex",
         marginTop: 20,
-        backgroundColor: "#F0E8DE"
+        backgroundColor: "#F0E8DE",
     },
     imagemhome: {
         width: "95%",
-        height: 660,
+        height: 640,
     },
     btn: {
         width: '60%',
@@ -40,5 +40,5 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         marginTop: 10
-    }
+    },
 })
