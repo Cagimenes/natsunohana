@@ -32,7 +32,7 @@ export default function Carrinho({navigation}) {
     }
     
     return (
-        <View style={styles.fundo}>
+        <ScrollView automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.fundo}>
             <Header/>
             <View style={styles.header}>
                 <MaterialCommunityIcons style={styles.voltar} name="arrow-left" color="#DC650E" size={33} onPress={() => navigation.navigate( "Cardapio" )}/>
@@ -40,16 +40,15 @@ export default function Carrinho({navigation}) {
             </View>
             <ScrollView>
                 <Text style={styles.itens}>ITENS</Text>
-                <FlatList
-                    data={produtos}
-                    renderItem={({ item }) => <CarrinhoLista
+                {produtos.map( (item) => (
+                    <CarrinhoLista
+                        key={item.id}
                         produto={item.produto}
                         preco={item.preco}
                         text={item.text}
-                    />}
-                    keyExtractor={(item) => item.id}
-                />
-                <TouchableOpacity style={styles.botaoAdd}>
+                    />
+                ))}
+                <TouchableOpacity style={styles.botaoAdd} onPress={() => navigation.navigate( "Cardapio" )}>
                     <Text style={styles.textAdd}>ADICIONAR MAIS ITENS</Text>
                 </TouchableOpacity>
                 <View style={styles.container}>
@@ -120,7 +119,7 @@ export default function Carrinho({navigation}) {
                             <Text style={styles.valorSub}>72,70</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.btnConfirmar}>
+                        <TouchableOpacity style={styles.btnConfirmar} onPress={() => setConfirmar( true ) }>
                             <Text style={styles.btnTextConf}>CONFIRMAR PEDIDO</Text>
                         </TouchableOpacity>
                         <View style={styles.ultimo}>
@@ -149,7 +148,7 @@ export default function Carrinho({navigation}) {
                     </View>
                 }
             </ScrollView>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -344,7 +343,7 @@ const styles = StyleSheet.create({
 
     },
     ultimo: {
-        height: 100
+        height: 30
     },
     localRetirada: {
         textAlign: "center",

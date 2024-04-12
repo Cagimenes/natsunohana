@@ -20,8 +20,9 @@ export default function Login({ setLogado, setCadastro }) {
 
     function Cadastro() {
         setLogado(true);
-        setCadastro(true);
+       setCadastro(true);
     }
+    
 
     return (
         <View style={css.view}>

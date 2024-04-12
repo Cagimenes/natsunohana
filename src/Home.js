@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import Header from "./Header";
 import { StatusBar } from "expo-status-bar";
 
-export default function Home()
+export default function Home({navigation})
 {
     return(
         <View style={styles.container}>
@@ -12,7 +12,7 @@ export default function Home()
           style={styles.imagemhome}  
           source={require('../assets/imagemhome.png')}
         />
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate( "Cardapio" )}>
             <Text style={styles.btnText}>FAÇA SEU PEDIDO</Text>
         </TouchableOpacity>
         </View>

@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 
-export default function CarrinhoLista({ produto, preco, text }) {
+export default function CarrinhoLista({ key, produto, preco, text }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={key}>
         <View style={styles.box1}>
             <Text style={styles.produto}>{produto}</Text>
         </View>
