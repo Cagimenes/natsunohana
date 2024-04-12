@@ -1,30 +1,49 @@
 import React, { useState } from 'react'
-import { Keyboard, Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Keyboard, Text, TextInput, View, TouchableOpacity, StyleSheet, Modal, ScrollView } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from 'expo-linear-gradient';
-import Cadastro from './Cadastro';
 import Header from './Header';
+import Cadastro from './Cadastro';
+import Home from './Home';
 
-export default function Login({ setLogado, setCadastro }) {
 
+export default function Login({setLogado, setCadastro}) {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [campo, setCampo] = useState(false);
+    const [incorreto, setIncorreto] = useState(false);
 
-    function Login() {
+    const handleSubmit = () => {
         Keyboard.dismiss();
+        if (!email || !senha) {
+            setCampo(true);
+            return;
+        }
         if (email == 'carolmicagimenes@gmail.com' && senha == '1234') {
             setLogado(true);
+            return;
         }
-    }
+        if (senha || email != false) {
+            setIncorreto(true);            
+        }       
+    };
 
+    const alertCampo = () => {
+        setCampo(false);
+    };
+
+    const alertIncorreto = () => {
+        setIncorreto(false);
+    };
+   
     function Cadastro() {
         setLogado(true);
         setCadastro(true);
     }
 
     return (
-        <View style={css.view}>
+        <ScrollView automaticallyAdjustKeyboardInsets={true} contentContainerStyle={css.view}>
             <Header />
             <StatusBar backgroundColor="#FF994F" />
             <Text style={css.bemVindo}>SEJA BEM VINDO(A) AO</Text>
@@ -42,24 +61,54 @@ export default function Login({ setLogado, setCadastro }) {
                 value={senha}
                 style={css.input}
             />
-            <TouchableOpacity onPress={Login}>
+            <TouchableOpacity>
                 <LinearGradient
                     colors={['#E46204', '#FF7300', '#FAA04C']}
                     style={css.botao}
-                    start={{x:0,y:1}}
-	                end={{x:1,y:0}}>
-                    <Text style={css.entrar}>ENTRAR</Text>
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 1, y: 0 }}>
+                    <Text style={css.entrar} onPress={handleSubmit}>ENTRAR</Text>
                 </LinearGradient>
-            </TouchableOpacity>          
+            </TouchableOpacity>
             <TouchableOpacity style={css.btn} onPress={Cadastro}>
                 <Text style={css.cadastro}>É NOVO POR AQUI?</Text>
             </TouchableOpacity>
-        </View>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={campo}
+                onRequestClose={alertCampo}>
+                <View style={css.modalContainer}>
+                    <View style={css.modalContent}>
+                        <Text style={css.modalTitle}>Preencha todos os campos!</Text>
+                        <Text style={css.modalMessage}>Tente Novamente</Text>
+                        <TouchableOpacity style={css.modalButton} onPress={alertCampo}>
+                            <Text style={css.modalButtonText}>OK</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={incorreto}
+                onRequestClose={alertIncorreto}>
+                <View style={css.modalContainer}>
+                    <View style={css.modalContent}>
+                        <Text style={css.modalTitle}>Senha ou email incorreto!</Text>
+                        <Text style={css.modalMessage}>Tente Novamente</Text>
+                        <TouchableOpacity style={css.modalButton} onPress={alertIncorreto}>
+                            <Text style={css.modalButtonText}>OK</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        </ScrollView>
     )
 }
 const css = StyleSheet.create({
     view: {
-        flex: 1,
+        flexGrow: 1,
         alignItems: 'center',
         backgroundColor: "#F0E8DE"
     },
@@ -116,5 +165,33 @@ const css = StyleSheet.create({
     cadastro: {
         color: '#E46204',
         fontWeight: 'bold'
-    }, 
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      },
+      modalContent: {
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 10,
+        width: 300,
+        height: 200,
+      },
+      modalTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        marginTop: 20
+      },
+      modalMessage: {
+        fontSize: 18,
+        marginTop: 15
+      },
+      modalButtonText: {
+        color: '#E46204',
+        textAlign: 'right',
+        fontSize: 20,
+        marginTop: 30
+      }
 })

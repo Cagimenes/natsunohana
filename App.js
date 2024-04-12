@@ -24,8 +24,6 @@ export default function App() {
     return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)
   }
 
-
-
   if (logado && !cadastro) {
     return (
       <NavigationContainer>
