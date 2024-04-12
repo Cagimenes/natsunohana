@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
 
 
-  const [logado, setLogado] = useState(false);
+  const [logado, setLogado] = useState(true);
   const [cadastro, setCadastro] = useState(false);
 
   if (!logado) {
@@ -24,8 +24,6 @@ export default function App() {
     return (<Cadastro setCadastro={setCadastro} setLogado={setLogado} />)
   }
 
-
-
   if (logado && !cadastro) {
     return (
       <NavigationContainer>
@@ -35,7 +33,8 @@ export default function App() {
             headerStyle: { backgroundColor: "#FF994F", height: 120 },
             tabBarActiveTintColor: "#DD6A00",
             tabBarInactiveTintColor: "white",
-            headerShown: false
+            headerShown: false,
+            tabBarHideOnKeyboard: true
           }}>
           <Tab.Screen
             name='Home' component={Home}

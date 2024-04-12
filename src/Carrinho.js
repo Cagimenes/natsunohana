@@ -1,6 +1,7 @@
 import { Image, StyleSheet, View, Text, FlatList, TouchableOpacity, TextInput, ScrollView, Pressable } from "react-native";
 import CarrinhoLista from "./CarrinhoLista";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from "react";
 import Rastreamento from "./Rastreamento"
 import Header from "./Header";
@@ -21,133 +22,145 @@ const produtos = [
     }
 ]
 
-export default function Carrinho({navigation}) {
+export default function Carrinho({ navigation }) {
 
     const [delivery, setDelivery] = useState(true);
 
     const [corfirmar, setConfirmar] = useState(false);
 
-    if( corfirmar ){
-        return( <Rastreamento setConfirmar={setConfirmar}/>)
+    if (corfirmar) {
+        return (<Rastreamento setConfirmar={setConfirmar} />)
     }
-    
+
     return (
         <ScrollView automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.fundo}>
-            <Header/>
-            <View style={styles.header}>
-                <MaterialCommunityIcons style={styles.voltar} name="arrow-left" color="#DC650E" size={33} onPress={() => navigation.navigate( "Cardapio" )}/>
-                <Text style={styles.carrinho}>CARRINHO</Text>
-            </View>
-            <ScrollView>
-                <Text style={styles.itens}>ITENS</Text>
-                {produtos.map( (item) => (
-                    <CarrinhoLista
-                        key={item.id}
-                        produto={item.produto}
-                        preco={item.preco}
-                        text={item.text}
-                    />
-                ))}
-                <TouchableOpacity style={styles.botaoAdd} onPress={() => navigation.navigate( "Cardapio" )}>
-                    <Text style={styles.textAdd}>ADICIONAR MAIS ITENS</Text>
-                </TouchableOpacity>
-                <View style={styles.container}>
-                    <View style={styles.box}>
-                        <Text style={styles.subtotal}>SUBTOTAL</Text>
-                    </View>
-                    <View style={styles.box2}>
-                        <Text style={styles.valorSub}>66,70</Text>
-                    </View>
+            <Header />
+                <View style={styles.header}>
+                    <MaterialCommunityIcons style={styles.voltar} name="arrow-left" color="#DC650E" size={33} onPress={() => navigation.navigate("Cardapio")} />
+                    <Text style={styles.carrinho}>CARRINHO</Text>
                 </View>
-                <View style={styles.container}>
-                    <Pressable style={ (delivery) ? styles.box3 : styles.box4 } onPress={() => setDelivery( (current) => !current)}>
-                        <Text style={(delivery) ? styles.delivery : styles.retirada}>DELIVERY</Text>
-                        <Text style={(delivery) ? styles.seis : styles.seis2}>R$6,00</Text>
-                    </Pressable>
-                    <Pressable style={ (delivery) ? styles.box4 : styles.box3} onPress={() => setDelivery( (current) => !current)}>
-                        <Text style={(delivery) ? styles.retirada : styles.delivery}>RETIRADA</Text>
-                    </Pressable>
-                </View>
-                {delivery ?
-                    <>
-                        <View>
-                            <Text style={styles.itens}>FORMA DE PAGAMENTO</Text>
-                        </View>
-                        <View style={styles.container}>
-                            <TouchableOpacity style={styles.botao}>
-                                <MaterialCommunityIcons style={styles.icone}name="credit-card" size={25} />
-                                <Text style={styles.btnText}>CARTÃO</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.container}>
-                            <TouchableOpacity style={styles.botao}>
-                                <Image style={styles.imgPix} source={require('../assets/pix.png')}/>
-                                <Text style={styles.btnText}>PIX</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.container}>
-                            <TouchableOpacity style={styles.botao}>
-                                <MaterialCommunityIcons style={styles.icone} name="currency-brl" size={25} />
-                                <Text style={styles.btnText}>DINHEIRO</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={styles.itens}>ENDEREÇO PARA ENTREGA</Text>
-                        </View>
-                        <Text style={styles.campos}>CEP</Text>
-                        <View style={styles.container}>
-                            <TextInput style={styles.input} />
-                        </View>
-                        <Text style={styles.campos}>ENDEREÇO</Text>
-                        <View style={styles.container}>
-                            <TextInput style={styles.inputEnd} />
-                            <TextInput style={styles.inputNum} />
-                        </View>
-                        <Text style={styles.campos}>COMPLEMENTO</Text>
-                        <View style={styles.container}>
-                            <TextInput style={styles.input} />
-                        </View>
-                        <Text style={styles.campos}>REFERÊNCIA</Text>
-                        <View style={styles.container}>
-                            <TextInput style={styles.input} />
-                        </View>
-                        <View style={styles.container}>
-                            <View style={styles.box}>
-                            <Text style={styles.subtotal}>TOTAL</Text>
+                <ScrollView>
+                    <Text style={styles.itens}>ITENS</Text>
+                    {produtos.map((item) => (
+                        <CarrinhoLista
+                            key={item.id}
+                            produto={item.produto}
+                            preco={item.preco}
+                            text={item.text}
+                        />
+                    ))}
+                    <TouchableOpacity style={styles.botaoAdd} onPress={() => navigation.navigate("Cardapio")}>
+                        <Text style={styles.textAdd}>ADICIONAR MAIS ITENS</Text>
+                    </TouchableOpacity>
+                    <View style={styles.container}>
+                        <View style={styles.box}>
+                            <Text style={styles.subtotal}>SUBTOTAL</Text>
                         </View>
                         <View style={styles.box2}>
-                            <Text style={styles.valorSub}>72,70</Text>
-                            </View>
+                            <Text style={styles.valorSub}>R$66,70</Text>
                         </View>
-                        <TouchableOpacity style={styles.btnConfirmar} onPress={() => setConfirmar( true ) }>
-                            <Text style={styles.btnTextConf}>CONFIRMAR PEDIDO</Text>
-                        </TouchableOpacity>
-                        <View style={styles.ultimo}>
+                    </View>
+                    <View style={styles.container}>
+                        <Pressable style={(delivery) ? styles.box3 : styles.box4} onPress={() => setDelivery((current) => !current)}>
+                            <Text style={(delivery) ? styles.delivery : styles.retirada}>DELIVERY</Text>
+                            <Text style={(delivery) ? styles.seis : styles.seis2}>R$6,00</Text>
+                        </Pressable>
+                        <Pressable style={(delivery) ? styles.box4 : styles.box3} onPress={() => setDelivery((current) => !current)}>
+                            <Text style={(delivery) ? styles.retirada : styles.delivery}>RETIRADA</Text>
+                        </Pressable>
+                    </View>
+                    {delivery ?
+                        <>
+                            <View>
+                                <Text style={styles.itens}>FORMA DE PAGAMENTO</Text>
+                            </View>
+                            <View style={styles.container}>
+                                <TouchableOpacity style={styles.botao}>
+                                    <MaterialCommunityIcons style={styles.icone} name="credit-card" size={25} />
+                                    <Text style={styles.btnText}>CARTÃO</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.container}>
+                                <TouchableOpacity style={styles.botao}>
+                                    <Image style={styles.imgPix} source={require('../assets/pix.png')} />
+                                    <Text style={styles.btnText}>PIX</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.container}>
+                                <TouchableOpacity style={styles.botao}>
+                                    <MaterialCommunityIcons style={styles.icone} name="currency-brl" size={25} />
+                                    <Text style={styles.btnText}>DINHEIRO</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <Text style={styles.itens}>ENDEREÇO PARA ENTREGA</Text>
+                            </View>
+                            <Text style={styles.campos}>CEP</Text>
+                            <View style={styles.container}>
+                                <TextInput style={styles.input} />
+                            </View>
+                            <Text style={styles.campos}>ENDEREÇO</Text>
+                            <View style={styles.container}>
+                                <TextInput style={styles.inputEnd} />
+                                <TextInput style={styles.inputNum} />
+                            </View>
+                            <Text style={styles.campos}>COMPLEMENTO</Text>
+                            <View style={styles.container}>
+                                <TextInput style={styles.input} />
+                            </View>
+                            <Text style={styles.campos}>REFERÊNCIA</Text>
+                            <View style={styles.container}>
+                                <TextInput style={styles.input} />
+                            </View>
+                            <View style={styles.container}>
+                                <View style={styles.box}>
+                                    <Text style={styles.subtotal}>TOTAL</Text>
+                                </View>
+                                <View style={styles.box2}>
+                                    <Text style={styles.valorSub}>R$72,70</Text>
+                                </View>
+                            </View>
+                            <TouchableOpacity>
+                                <LinearGradient
+                                    colors={['#E46204', '#FF7300', '#FAA04C']}
+                                    style={styles.confirmar}
+                                    start={{ x: 0, y: 1 }}
+                                    end={{ x: 1, y: 0 }}>
+                                    <Text style={styles.btnTextConf}>CONFIRMAR PEDIDO</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                            <View style={styles.ultimo}>
 
-                        </View>
-                    </>
-                :
-                    <View>
-                        <Text style={styles.localRetirada}>LOCAL DE RETIRADA</Text>
-                        <Text style={styles.local} >RUA XV DE NOVEMBRO, 705 - BARIRI / SP</Text>
-                        <Text style={styles.info}>NOME:  Júlio César Xavier Pereira</Text>
-                        <Text style={styles.info}>CELULAR:  (14) 99652-0908</Text>
-                        <Text style={styles.horario}>O HORÁRIO DA RETIRADA SERÁ INFORMADO PELO NÚMERO DO SEU CELULAR</Text>
-                        <View style={styles.container}>
-                            <View style={styles.box}>
-                            <Text style={styles.subtotal}>TOTAL</Text>
-                        </View>
-                        <View style={styles.box2}>
-                            <Text style={styles.valorSub}>66,70</Text>
                             </View>
+                        </>
+                        :
+                        <View>
+                            <Text style={styles.localRetirada}>LOCAL DE RETIRADA</Text>
+                            <Text style={styles.local} >RUA XV DE NOVEMBRO, 705 - BARIRI / SP</Text>
+                            <Text style={styles.info}>NOME:  Júlio César Xavier Pereira</Text>
+                            <Text style={styles.info}>CELULAR:  (14) 99652-0908</Text>
+                            <Text style={styles.horario}>O HORÁRIO DA RETIRADA SERÁ INFORMADO PELO NÚMERO DO SEU CELULAR</Text>
+                            <View style={styles.container}>
+                                <View style={styles.box}>
+                                    <Text style={styles.subtotal}>TOTAL</Text>
+                                </View>
+                                <View style={styles.box2}>
+                                    <Text style={styles.valorSub}>R$66,70</Text>
+                                </View>
+                            </View>
+                            <TouchableOpacity>
+                                <LinearGradient
+                                    colors={['#E46204', '#FF7300', '#FAA04C']}
+                                    style={styles.confirmar}
+                                    start={{ x: 0, y: 1 }}
+                                    end={{ x: 1, y: 0 }}>
+                                    <Text style={styles.btnTextConf} onPress={() => setConfirmar(true)}>CONFIRMAR PEDIDO</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                            <View style={styles.ultimo}></View>
                         </View>
-                        <TouchableOpacity style={styles.btnConfirmar}>
-                            <Text style={styles.btnTextConf} onPress={() => setConfirmar(true)}>CONFIRMAR PEDIDO</Text>
-                        </TouchableOpacity>
-                        <View style={styles.ultimo}></View>
-                    </View>
-                }
-            </ScrollView>
+                    }
+                </ScrollView>
         </ScrollView>
     )
 }
@@ -264,7 +277,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 35,
         fontWeight: "bold",
-        color: "white" 
+        color: "white"
     },
     retirada: {
         textAlign: "center",
@@ -348,7 +361,7 @@ const styles = StyleSheet.create({
     localRetirada: {
         textAlign: "center",
         fontWeight: "bold",
-        color:"#FF7300",
+        color: "#FF7300",
         fontSize: 20,
         marginTop: 18
     },
@@ -357,7 +370,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18,
         marginTop: 8
-        
+
     },
     info: {
         borderColor: "black",
@@ -382,27 +395,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: "center",
     },
-    btnConfirmar: {
-        fontWeight: "bold",
-        fontSize: 13,
-        borderRadius: 5,
-        width: "91%",
-        height: 50,
-        alignSelf: "center",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#FF7300",
-        padding: 10,
-        marginTop: 8
-    },
     btnText: {
         color: "black",
         fontWeight: "bold"
     },
     btnTextConf: {
         color: "white",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontSize: 20,
+        textAlign: 'center',
     },
     seis: {
         width: "100%",
@@ -411,7 +412,7 @@ const styles = StyleSheet.create({
         marginLeft: 114,
         marginTop: 14
     },
-    seis2:{
+    seis2: {
         width: "100%",
         color: "#FF7300",
         fontWeight: "bold",
@@ -425,5 +426,16 @@ const styles = StyleSheet.create({
         width: 22,
         height: 22,
         marginRight: 13
-    }
+    },
+    confirmar: {
+        borderRadius: 5,
+        width: "91%",
+        height: 50,
+        alignSelf: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
+        marginTop: 10
+    },
 });
